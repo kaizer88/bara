@@ -1,0 +1,83 @@
+
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Risk Admin App</title>
+
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+
+	{% include 'login_base_css.html' %}
+	<!-- /login stylesheets -->
+
+    {% include 'login_base_js.html' %}
+	<!-- /login JS files -->
+
+</head>
+
+<body class="bg-slate-800">
+
+	<!-- Page content -->
+	<div class="page-content">
+
+		<!-- Main content -->
+		<div class="content-wrapper">
+
+			<!-- Content area -->
+			<div class="content d-flex justify-content-center align-items-center">
+
+				<!-- Login card -->
+				<form class="login-form" action="" method="POST">
+					{% csrf_token %}
+					<div class="card mb-0">
+						<div class="card-body">
+							<div class="text-center mb-3">
+<!--								<i class="icon-people icon-2x text-warning-400 border-warning-400 border-3 rounded-round p-3 mb-3 mt-1"></i>-->
+								<h5 class="mb-0">Risk Admin App Login</h5>
+								<span class="d-block text-muted">Your credentials</span>
+							</div>
+
+							<div class="form-group form-group-feedback form-group-feedback-left">
+
+								<div class="form-group">{% bootstrap_field form.username %}</div>
+								<div class="form-control-feedback">
+									<i class="icon-user text-muted"></i>
+								</div>
+							</div>
+
+							<div class="form-group form-group-feedback form-group-feedback-left">
+								<div class="form-group">{% bootstrap_field form.password %}</div>
+								<div class="form-control-feedback">
+									<i class="icon-lock2 text-muted"></i>
+								</div>
+							</div>
+
+
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">Sign in <i class="icon-circle-right2 ml-2"></i></button>
+							</div>
+
+						</div>
+					</div>
+				</form>
+				<!-- /login card -->
+
+			</div>
+			<!-- /content area -->
+
+		</div>
+		<!-- /main content -->
+
+	</div>
+	<!-- /page content -->
+
+</body>
+</html>
+{% endblock content %}

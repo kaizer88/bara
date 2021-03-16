@@ -1,0 +1,164 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% load bootstrap4 %}
+
+{% block contents %}
+<script src="{% static 'custom/js/tool_generator.js' %}"></script>
+
+    <!-- Page header -->
+<div class="page-header">
+    <div class="page-header-content header-elements-md-inline">
+        <div class="page-title d-flex">
+            <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"></span>
+				{% if ag %}{{ edit }} {% else %} {{ add }}{% endif %}</h4>
+            <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+        </div>
+
+    </div>
+</div>
+<!-- /page header -->
+<div class="content pt-0">
+
+        <!-- 2 columns form -->
+        <div class="card">
+            <div class="card-header header-elements-inline">
+                <h5 class="card-title">Adhoc file request</h5>
+                <div class="header-elements">
+                    <div class="list-icons">
+                        <a class="list-icons-item" data-action="collapse"></a>
+                        <a class="list-icons-item" data-action="reload"></a>
+                        <a class="list-icons-item" data-action="remove"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body">
+                <form action="" method="post" novalidate enctype="multipart/form-data" id="form">
+                {% csrf_token %}
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">Select Environment</label>
+                        <div class="col-lg-10">
+                            <select class="form-control" name="env" class="required">
+                                <option value="">Default select box</option>
+                                <option value="dev">Dev</option>
+                                <option value="uat">UAT</option>
+                                <option value="prod">Prod</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">select type(s)</label>
+                        <div class="col-lg-10">
+                        <select id="types" multiple="multiple" class="form-control select" name="types"> data-fouc>
+                            <option value="stress">Stress</option>
+                            <option value="mcvar">Mcvar</option>
+                            <option value="headlines">Headlines</option>
+                            <option value="headline_assets">Headlines Assets</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">select portfolio(s)</label>
+                        <div class="col-lg-10">
+                        <select multiple="multiple" class="form-control select" name="portfolios"> data-fouc>
+                            <option value="p1">p1</option>
+                            <option value="p2">p2</option>
+                            <option value="p3">p3</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">select stress model </label>
+                        <div class="col-lg-10">
+                        <select id="stress" class="form-control" name="stress_model">
+                            <option value="default">Default select box</option>
+                            <option value="MAC.XL">MAC.XL</option>
+                            <option value="MAC.L">MAC.L</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">select mcvar model</label>
+                        <div class="col-lg-10">
+                        <select id="mcvar" class="form-control" name="mcvar_model">>
+                            <option value="default">Default select box</option>
+                            <option value="BIM303">BIM303</option>
+                            <option value="MAC.L">MAC.L</option>
+                            <option value="BIM303XL">BIM303XL</option>
+                            <option value="MAC.XL">MAC.XL</option>
+                            <option value="MAC.L GEMLT">MAC.L GEMLT</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">select headline model</label>
+                        <div class="col-lg-10">
+                        <select id="headlines" class="form-control" name="headlines_model">
+                            <option value="default">Default select box</option>
+                            <option value="BIM303">BIM303</option>
+                            <option value="MAC.L">MAC.L</option>
+                            <option value="BIM303XL">BIM303XL</option>
+                            <option value="MAC.XL">MAC.XL</option>
+                            <option value="MAC.L GEMLT">MAC.L GEMLT</option>
+                        </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">select headline assets model</label>
+                        <div class="col-lg-10">
+                        <select id="headline_assets" class="form-control" name="headline_assets_model">
+                            <option value="default">Default select box</option>
+                            <option value="BIM303">BIM303</option>
+                            <option value="MAC.L">MAC.L</option>
+                            <option value="BIM303XL">BIM303XL</option>
+                            <option value="MAC.XL">MAC.XL</option>
+                            <option value="MAC.L GEMLT">MAC.L GEMLT</option>
+                        </select>
+                        </div>
+                    </div>
+
+<!--                    <div class="form-check form-check-switchery">-->
+<!--                        <label class="form-check-label">-->
+<!--                            <input type="checkbox" class="form-check-input-switchery" checked data-fouc>-->
+<!--                            Instrument loads-->
+<!--                        </label>-->
+<!--                    </div>-->
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-lg-2">Select date range:</label>
+                        <div class="col-lg-10 input-group">
+                            <span class="input-group-prepend">
+                                <span class="input-group-text"><i class="icon-calendar22"></i></span>
+                            </span>
+                            <input type="text" class="form-control daterange-basic" value="" name="date_range">>
+                        </div>
+                    </div>
+
+                    <div class="form-check form-check-switchery">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input-switchery" checked name="ex_weekends" data-fouc>
+                            Exclude weekends
+                        </label>
+                    </div>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Generate file <i class="icon-paperplane ml-2"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+		<!-- /2 columns form -->
+
+</div>
+
+{% endblock %}
