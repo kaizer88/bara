@@ -1,7 +1,6 @@
 
 {% extends "base.html" %}
 {% load static %}
-
 {% load bootstrap4 %}
 
 {% block contents %}
@@ -35,25 +34,23 @@
             </div>
 
             <div class="card-body">
-                <form action="" method="post" novalidate enctype="multipart/form-data" id="form">
+                <form action="" method="post" name="myform" id="myform" onsubmit="return validate(this);">
                 {% csrf_token %}
 
-                    <div class="form-group row">
-                        <label class="col-form-label col-lg-2">Select Environment</label>
-                        <div class="col-lg-10">
-                            <select class="form-control" name="env" class="required">
-                                <option value="">Default select box</option>
-                                <option value="dev">Dev</option>
-                                <option value="uat">UAT</option>
-                                <option value="prod">Prod</option>
-                            </select>
-                        </div>
-                    </div>
+
+<!--                    <select name="item_id">-->
+<!--                    {% for entry in q %}-->
+<!--                        <option value="{{ entry.name }}">{{ entry.name }}</option>-->
+<!--                    {% endfor %}-->
+<!--                    </select>-->
+
+
 
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">select type(s)</label>
                         <div class="col-lg-10">
-                        <select id="types" multiple="multiple" class="form-control select" name="types"> data-fouc>
+                        <select id="types" name="types" multiple="multiple" class="form-control select"> data-fouc>
+
                             <option value="stress">Stress</option>
                             <option value="mcvar">Mcvar</option>
                             <option value="headlines">Headlines</option>
@@ -65,7 +62,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">select portfolio(s)</label>
                         <div class="col-lg-10">
-                        <select multiple="multiple" class="form-control select" name="portfolios"> data-fouc>
+                        <select id="portfolios" name="portfolios" multiple="multiple" class="form-control select"> data-fouc>
                             <option value="p1">p1</option>
                             <option value="p2">p2</option>
                             <option value="p3">p3</option>
@@ -76,7 +73,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">select stress model </label>
                         <div class="col-lg-10">
-                        <select id="stress" class="form-control" name="stress_model">
+                        <select id="stress" name="stress_model" class="form-control">
                             <option value="default">Default select box</option>
                             <option value="MAC.XL">MAC.XL</option>
                             <option value="MAC.L">MAC.L</option>
@@ -87,7 +84,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">select mcvar model</label>
                         <div class="col-lg-10">
-                        <select id="mcvar" class="form-control" name="mcvar_model">>
+                        <select id="mcvar" name="mcvar_model" class="form-control">
                             <option value="default">Default select box</option>
                             <option value="BIM303">BIM303</option>
                             <option value="MAC.L">MAC.L</option>
@@ -101,7 +98,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">select headline model</label>
                         <div class="col-lg-10">
-                        <select id="headlines" class="form-control" name="headlines_model">
+                        <select id="headlines" name="headlines_model" class="form-control">
                             <option value="default">Default select box</option>
                             <option value="BIM303">BIM303</option>
                             <option value="MAC.L">MAC.L</option>
@@ -115,7 +112,7 @@
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">select headline assets model</label>
                         <div class="col-lg-10">
-                        <select id="headline_assets" class="form-control" name="headline_assets_model">
+                        <select id="headline_assets" name="headline_assets_model" class="form-control">
                             <option value="default">Default select box</option>
                             <option value="BIM303">BIM303</option>
                             <option value="MAC.L">MAC.L</option>
@@ -125,13 +122,6 @@
                         </select>
                         </div>
                     </div>
-
-<!--                    <div class="form-check form-check-switchery">-->
-<!--                        <label class="form-check-label">-->
-<!--                            <input type="checkbox" class="form-check-input-switchery" checked data-fouc>-->
-<!--                            Instrument loads-->
-<!--                        </label>-->
-<!--                    </div>-->
 
                     <div class="form-group row">
                         <label class="col-form-label col-lg-2">Select date range:</label>
@@ -151,7 +141,7 @@
                     </div>
 
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Generate file <i class="icon-paperplane ml-2"></i></button>
+                        <button type="submit" name="go" id="go" class="btn btn-primary">Generate file <i class="icon-paperplane ml-2"></i></button>
                     </div>
                 </form>
             </div>
@@ -160,5 +150,119 @@
 		<!-- /2 columns form -->
 
 </div>
+
+<script>
+    function validate()
+{
+    // if (allow) // For example, checking that a field isn't empty
+    // {
+    //    return true; // Allow the form to submit
+    // }
+    // else
+    // {
+    //    return false; // Stop the form submitting
+    // }
+    // var arr = $(e.target).val();
+    // let action = $("#types option:selected").attr('data-id');
+    // var id = $('#types').find(':selected').data('name');
+    // var select = $("#types")[0].selectedIndex;
+    // var id= $("#types option:eq("+select+")").data("id");
+    // var type=$("#types option:eq("+select+")").data("name");
+    // console.log(id +" "+ type)
+    // alert("val");
+}
+
+$('#go').click(function(e) {
+    // e.preventDefault();
+    var event = (window.event || e);
+    // event.preventDefault();
+
+    // var arr = $("#portfolios").val();
+    // // console.log(select);
+    // console.log(arr);
+    // alert(arr);
+    let arr = $("#portfolios").val();
+    let arr2 = $("#stress").val();
+    let arr3 = $("#mcvar").val();
+    let arr4 = $("#headlines").val();
+    let arr5 = $("#headline_assets").val();
+    let arr_types = $("#types").val();
+    // alert(arr_types.length===0);
+    // console.log(arr_types);
+    // var n = arr_types.includes("stress");
+    // alert(n);
+    if(arr_types.length===0){
+        alert("Please select type");
+        event.preventDefault();
+
+    }else {
+        if ((arr_types.includes("stress")) && (arr2 === 'default')) {
+            alert("yes stress")
+            event.preventDefault();
+
+        } else {
+            alert("no stress")
+        }
+        if ((arr_types.includes("mcvar")) && (arr3 === 'default')) {
+            alert("yes mcvar")
+            event.preventDefault();
+
+        } else {
+            alert("no mcvar")
+        }
+        if ((arr_types.includes("headlines")) && (arr4 === 'default')) {
+            alert("yes headlines")
+            event.preventDefault();
+
+        } else {
+            alert("no headlines")
+        }
+        if ((arr_types.includes("headline_assets")) && (arr5 === 'default')) {
+            alert("yes headline_assets")
+            event.preventDefault();
+
+        } else {
+            alert("no headline_assets")
+        }
+    }
+
+    // if((jQuery.inArray("stress", arr_types) != -1)&&(arr2==='default')){
+    //     alert("select stress model");
+    //     event.preventDefault();
+    //     }
+    //   else {
+    //     alert("false this1");
+    //     return true;
+    //   }
+    // if((jQuery.inArray("mcvar", arr_types) != -1)&&(arr2==='default')){
+    //     alert("select mcvar model");
+    //     event.preventDefault();
+    //     }
+    //   else {
+    //     alert("false this2");
+    //     return true;
+    //   }
+    //
+    // if((jQuery.inArray("headlines", arr_types) != -1)&&(arr2==='default')){
+    //     alert("select headlines model");
+    //     event.preventDefault();
+    //     }
+    //   else {
+    //     alert("false this3");
+    //     return true;
+    //   }
+    //
+    // if((jQuery.inArray("headline_assets", arr_types) != -1)&&(arr2==='default')){
+    //     alert("select headline assets model");
+    //     event.preventDefault();
+    //     }
+    //   else {
+    //     alert("false this4");
+    //     return true;
+    //   }
+
+});
+
+</script>
 
 {% endblock %}

@@ -1,4 +1,18 @@
 {
-    "env": "default",
-    "types": "mcvar"
+    "portfolios": [
+        "p1"
+    ],
+    "analysis-date": [
+        "2021-03-21",
+        "2021-03-22",
+        "2021-03-23",
+        "2021-03-24"
+    ],
+    "exclude_weekends": false,
+    "exportsets": [
+        {
+            "types": "stress",
+            "model": "MAC.XL"
+        }
+    ]
 }

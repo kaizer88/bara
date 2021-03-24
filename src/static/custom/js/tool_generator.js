@@ -8,12 +8,15 @@ $( document ).ready(function() {
 
 });
 
+
+
 $(function(){
   $('#types').change(function(e){
 
     $("#mcvar").prop("disabled", true);
     $("#headlines").prop("disabled", true);
     $("#headline_assets").prop("disabled", true);
+
 
       var myarray = $(e.target).val();
 
@@ -22,6 +25,7 @@ $(function(){
         }
       else {
           $("#stress").prop("disabled", true);
+          $('#stress').prop('selectedIndex',0);
       }
 
       if(jQuery.inArray("mcvar", myarray) != -1) {
@@ -29,6 +33,7 @@ $(function(){
         }
       else {
           $("#mcvar").prop("disabled", true);
+          $('#mcvar').prop('selectedIndex',0);
       }
 
       if(jQuery.inArray("headlines", myarray) != -1) {
@@ -36,6 +41,7 @@ $(function(){
         }
       else {
           $("#headlines").prop("disabled", true);
+          $('#headlines').prop('selectedIndex',0);
       }
 
       if(jQuery.inArray("headline_assets", myarray) != -1) {
@@ -43,6 +49,7 @@ $(function(){
         }
       else {
           $("#headline_assets").prop("disabled", true);
+          $('#headline_assets').prop('selectedIndex',0);
       }
 
 
